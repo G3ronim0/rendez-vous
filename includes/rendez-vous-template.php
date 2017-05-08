@@ -1130,6 +1130,7 @@ function rendez_vous_single_the_dates( $view = 'single' ) {
 			 *
 			 * @param str $col_header The HTML for the column header.
 			 * @param str $date The UNIX timestamp.
+			 * @return str $col_header The HTML for the column header.
 			 */
 			$output .= apply_filters( 'rendez_vous_single_get_the_dates_header', $col_header, $date );
 
