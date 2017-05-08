@@ -326,6 +326,13 @@ function rendez_vous_single_content() {
 	// Make sure embed url are processed
 	add_filter( 'embed_post_id', 'rendez_vous_single_get_the_id' );
 
+	/**
+	 * Allow injection before form.
+	 *
+	 * @since 1.4.3
+	 */
+	do_action( 'rendez_vous_single_content_before' );
+
 	?>
 	<form action="<?php echo esc_url( rendez_vous_single_the_form_action() );?>" method="post" id="rendez-vous-single-form" class="standard-form">
 
@@ -374,6 +381,13 @@ function rendez_vous_single_content() {
 		<?php if ( ! rendez_vous_single_date_set() ) rendez_vous_single_the_submit( 'single' ) ;?>
 	</form>
 	<?php
+
+	/**
+	 * Allow injection after form.
+	 *
+	 * @since 1.4.3
+	 */
+	do_action( 'rendez_vous_single_content_after' );
 
 	// Stop processing embeds
 	remove_filter( 'embed_post_id', 'rendez_vous_single_get_the_id' );
