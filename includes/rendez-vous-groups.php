@@ -1096,7 +1096,7 @@ class Rendez_Vous_Group extends BP_Group_Extension {
 	 * @uses  add_filter() to override rendez-vous key vars
 	 */
 	public function setup_hooks() {
-		add_action( 'bp_screens',                                 array( $this, 'group_handle_screens' ),        20    );
+		add_action( 'bp_screens',                                 array( $this, 'group_handle_screens' ),        2     );
 		add_action( 'rendez_vous_after_saved',                    array( $this, 'group_last_activity' ),         10, 1 );
 		add_filter( 'rendez_vous_load_scripts',                   array( $this, 'is_rendez_vous' ),              10, 1 );
 		add_filter( 'rendez_vous_load_editor',                    array( $this, 'is_rendez_vous' ),              10, 1 );
