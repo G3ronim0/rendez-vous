@@ -1111,12 +1111,27 @@ function rendez_vous_single_the_dates( $view = 'single' ) {
 		foreach ( $header as $date ) {
 			$output .= '<th class="rendez-vous-date">';
 
+			// init col header
+			$col_header = '';
+
 			if ( is_long( $date ) ) {
-				$output .= '<div class="date">' . date_i18n( get_option('date_format'), $date ) . '</div>';
-				$output .= '<div class="time">' . date_i18n( get_option('time_format'), $date ) . '</div>';
+				$col_header .= '<div class="date">' . date_i18n( get_option('date_format'), $date ) . '</div>';
+				$col_header .= '<div class="time">' . date_i18n( get_option('time_format'), $date ) . '</div>';
 			} else {
-				$output .= '<div class="none">' . esc_html__( 'None', 'rendez-vous') . '</div>';
+				$col_header .= '<div class="none">' . esc_html__( 'None', 'rendez-vous') . '</div>';
 			}
+
+			/**
+			 * Filter the date header to allow overrides.
+			 *
+			 * What we really want is to insert the event title here.
+			 *
+			 * @since 1.4.3
+			 *
+			 * @param str $col_header The HTML for the column header.
+			 * @param str $date The UNIX timestamp.
+			 */
+			$output .= apply_filters( 'rendez_vous_single_get_the_dates_header', $col_header, $date );
 
 			$output .= '</th>';
 		}
