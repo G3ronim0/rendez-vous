@@ -1277,10 +1277,11 @@ function rendez_vous_single_the_dates( $view = 'single' ) {
 		 * @since Rendez Vous (1.4.3)
 		 *
 		 * @param str $output The output as it currently stands.
+		 * @param array $header The array of dates.
 		 * @param str $view The output mode ('view' or 'edit').
 		 * @return str $output The modified output.
 		 */
-		$output = apply_filters( 'rendez_vous_single_get_the_dates_rows_after', $output, $view );
+		$output = apply_filters( 'rendez_vous_single_get_the_dates_rows_after', $output, $header, $view );
 
 		$output .= '</tbody>';
 		$output .= '</table>';
