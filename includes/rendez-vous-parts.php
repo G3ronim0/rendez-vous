@@ -334,30 +334,34 @@ function rendez_vous_single_content() {
 	do_action( 'rendez_vous_single_content_before' );
 
 	?>
-	<form action="<?php echo esc_url( rendez_vous_single_the_form_action() );?>" method="post" id="rendez-vous-single-form" class="standard-form">
+	<form action="<?php echo esc_url( rendez_vous_single_the_form_action() );?>" method="post" id="rendez-vous-single-form" class="standard-form <?php echo esc_attr( rendez_vous_single_the_form_class() );?>">
 
-		<label for="rendez-vous-single-description"><?php esc_html_e( 'Description', 'rendez-vous' ); ?></label>
-		<div id="rendez-vous-single-description"><?php rendez_vous_single_the_description() ;?></div>
+		<div class="rendez-vous-item-meta">
 
-		<label for="rendez-vous-single-venue"><?php esc_html_e( 'Venue', 'rendez-vous' ); ?></label>
-		<div id="rendez-vous-single-venue"><?php rendez_vous_single_the_venue() ;?></div>
+			<label for="rendez-vous-single-description"><?php esc_html_e( 'Description', 'rendez-vous' ); ?></label>
+			<div id="rendez-vous-single-description"><?php rendez_vous_single_the_description() ;?></div>
 
-		<?php if ( rendez_vous_single_has_type() ) : ?>
+			<label for="rendez-vous-single-venue"><?php esc_html_e( 'Venue', 'rendez-vous' ); ?></label>
+			<div id="rendez-vous-single-venue"><?php rendez_vous_single_the_venue() ;?></div>
 
-			<label for="rendez-vous-single-type"><?php esc_html_e( 'Type', 'rendez-vous' ); ?></label>
-			<div id="rendez-vous-single-type"><?php rendez_vous_single_the_type() ;?></div>
+			<?php if ( rendez_vous_single_has_type() ) : ?>
 
-		<?php endif; ?>
+				<label for="rendez-vous-single-type"><?php esc_html_e( 'Type', 'rendez-vous' ); ?></label>
+				<div id="rendez-vous-single-type"><?php rendez_vous_single_the_type() ;?></div>
 
-		<?php if ( rendez_vous_single_date_set() ) :?>
+			<?php endif; ?>
 
-			<label for="rendez-vous-single-date"><?php esc_html_e( 'Fixed to:', 'rendez-vous' ) ;?></label>
-			<div id="rendez-vous-single-date"><?php rendez_vous_single_the_date() ;?></div>
+			<?php if ( rendez_vous_single_date_set() ) :?>
 
-		<?php endif ;?>
+				<label for="rendez-vous-single-date"><?php esc_html_e( 'Fixed to:', 'rendez-vous' ) ;?></label>
+				<div id="rendez-vous-single-date"><?php rendez_vous_single_the_date() ;?></div>
 
-		<label for="rendez-vous-single-duration"><?php esc_html_e( 'Duration (hours)', 'rendez-vous' ); ?></label>
-		<div id="rendez-vous-single-duration"><?php rendez_vous_single_the_duration() ;?></div>
+			<?php endif ;?>
+
+			<label for="rendez-vous-single-duration"><?php esc_html_e( 'Duration (hours)', 'rendez-vous' ); ?></label>
+			<div id="rendez-vous-single-duration"><?php rendez_vous_single_the_duration() ;?></div>
+
+		</div>
 
 		<hr/>
 
