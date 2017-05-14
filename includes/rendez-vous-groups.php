@@ -196,6 +196,8 @@ class Rendez_Vous_Group extends BP_Group_Extension {
 
 			<?php endif; ?>
 
+			<?php do_action( 'rendez_vous_group_edit_screen_before', $group_id ); ?>
+
 			<div class="field-group">
 				<div class="checkbox">
 					<label>
@@ -207,6 +209,8 @@ class Rendez_Vous_Group extends BP_Group_Extension {
 					</label>
 				</div>
 			</div>
+
+			<?php do_action( 'rendez_vous_group_edit_screen_after', $group_id ); ?>
 
 			<?php if ( bp_is_group_admin_page() ) : ?>
 				<input type="submit" name="save" value="<?php _e( 'Save', 'rendez-vous' );?>" />
@@ -266,6 +270,16 @@ class Rendez_Vous_Group extends BP_Group_Extension {
 		foreach ( $settings as $meta_key => $meta_value ) {
 			groups_update_groupmeta( $group_id, $meta_key, $meta_value );
 		}
+
+		/**
+		 * Broadcast end of save procedure.
+		 *
+		 * @since 1.4.3
+		 *
+		 * @param int $group_id The numeric ID of the group
+		 * @param array $settings The Rendez Vous settings
+		 */
+		do_action( 'rendez_vous_group_edit_screen_save', $group_id, $settings );
 
 		if ( bp_is_group_admin_page() || is_admin() ) {
 
