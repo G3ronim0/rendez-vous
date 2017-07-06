@@ -839,6 +839,30 @@ function rendez_vous_single_the_form_action() {
 }
 
 /**
+ * Output the edit form class for the Rendez Vous.
+ *
+ * @since Rendez Vous (1.3.4)
+ */
+function rendez_vous_single_the_form_class() {
+
+	// init classes
+	$classes = array();
+
+	// does this Rendez Vous have a term?
+	if ( isset( rendez_vous()->item->type ) AND is_array( rendez_vous()->item->type ) ) {
+		foreach( rendez_vous()->item->type AS $type ) {
+			$classes[] = 'rendez-vous-' . $type->slug;
+			$classes[] = 'rendez-vous-' . $type->term_id;
+		}
+	}
+
+	// crunch them
+	$class = implode( ' ', $classes );
+
+	return apply_filters( 'rendez_vous_single_the_form_class', $class, rendez_vous()->item );
+}
+
+/**
  * Output the ID of the Rendez Vous.
  *
  * @since Rendez Vous (1.0.0)
@@ -1111,12 +1135,28 @@ function rendez_vous_single_the_dates( $view = 'single' ) {
 		foreach ( $header as $date ) {
 			$output .= '<th class="rendez-vous-date">';
 
+			// init col header
+			$col_header = '';
+
 			if ( is_long( $date ) ) {
-				$output .= '<div class="date">' . date_i18n( get_option('date_format'), $date ) . '</div>';
-				$output .= '<div class="time">' . date_i18n( get_option('time_format'), $date ) . '</div>';
+				$col_header .= '<div class="date">' . date_i18n( get_option('date_format'), $date ) . '</div>';
+				$col_header .= '<div class="time">' . date_i18n( get_option('time_format'), $date ) . '</div>';
 			} else {
-				$output .= '<div class="none">' . esc_html__( 'None', 'rendez-vous') . '</div>';
+				$col_header .= '<div class="none">' . esc_html__( 'None', 'rendez-vous') . '</div>';
 			}
+
+			/**
+			 * Filter the date header to allow overrides.
+			 *
+			 * What we really want is to insert the event title here.
+			 *
+			 * @since 1.4.3
+			 *
+			 * @param str $col_header The HTML for the column header.
+			 * @param str $date The UNIX timestamp.
+			 * @return str $col_header The HTML for the column header.
+			 */
+			$output .= apply_filters( 'rendez_vous_single_get_the_dates_header', $col_header, $date );
 
 			$output .= '</th>';
 		}
@@ -1230,6 +1270,18 @@ function rendez_vous_single_the_dates( $view = 'single' ) {
 				$output .= '<tr>' . $ending_rows['editable_row'] . '</tr>';
 			}
 		}
+
+		/**
+		 * Allow extra rows to be added to the table.
+		 *
+		 * @since Rendez Vous (1.4.3)
+		 *
+		 * @param str $output The output as it currently stands.
+		 * @param array $header The array of dates.
+		 * @param str $view The output mode ('view' or 'edit').
+		 * @return str $output The modified output.
+		 */
+		$output = apply_filters( 'rendez_vous_single_get_the_dates_rows_after', $output, $header, $view );
 
 		$output .= '</tbody>';
 		$output .= '</table>';
