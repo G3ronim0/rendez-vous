@@ -433,7 +433,7 @@ var rdv = rdv || {};
 			'blur .rdv-input-what' : 'storeWhatInput',
 			'click .rdv-check-what' : 'storeWhatInput',
 			'change .rdv-select-what' : 'storeWhatInput',
-			'blur .rdv-input-when' : 'storeWhenInput',
+			'change .rdv-input-when' : 'storeWhenInput',
 			'click .trashday' : 'trashDay',
 		},
 
