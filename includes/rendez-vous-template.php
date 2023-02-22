@@ -407,7 +407,7 @@ function rendez_vous_has_rendez_vouss( $args = [] ) {
 	// Init vars.
 	$organizer = false;
 	$attendees = [];
-	$type = '';
+	$type      = '';
 
 	// Get the User ID.
 	if ( bp_is_user() ) {
@@ -415,7 +415,7 @@ function rendez_vous_has_rendez_vouss( $args = [] ) {
 			$organizer = bp_displayed_user_id();
 		} elseif ( bp_is_current_action( 'attend' ) ) {
 			$attendee_id = bp_is_my_profile() ? bp_loggedin_user_id() : bp_displayed_user_id();
-			$attendees = [ $attendee_id ];
+			$attendees   = [ $attendee_id ];
 		}
 
 		if ( bp_is_current_component( rendez_vous()->get_component_slug() ) && ! empty( $_REQUEST['type'] ) ) {
@@ -494,10 +494,10 @@ function rendez_vous_pagination_count() {
 function rendez_vous_get_pagination_count() {
 
 	$query_loop = rendez_vous()->query_loop;
-	$start_num = intval( ( $query_loop->pag_page - 1 ) * $query_loop->pag_num ) + 1;
-	$from_num = bp_core_number_format( $start_num );
-	$to_num = bp_core_number_format( ( $start_num + ( $query_loop->pag_num - 1 ) > $query_loop->total_rendez_vous_count ) ? $query_loop->total_rendez_vous_count : $start_num + ( $query_loop->pag_num - 1 ) );
-	$total = bp_core_number_format( $query_loop->total_rendez_vous_count );
+	$start_num  = intval( ( $query_loop->pag_page - 1 ) * $query_loop->pag_num ) + 1;
+	$from_num   = bp_core_number_format( $start_num );
+	$to_num     = bp_core_number_format( ( $start_num + ( $query_loop->pag_num - 1 ) > $query_loop->total_rendez_vous_count ) ? $query_loop->total_rendez_vous_count : $start_num + ( $query_loop->pag_num - 1 ) );
+	$total      = bp_core_number_format( $query_loop->total_rendez_vous_count );
 
 	$pag = sprintf(
 		/* translators: 1: The from number, 3: The to number, 3: The total number. */
@@ -568,14 +568,14 @@ function rendez_vous_class() {
 function rendez_vous_get_class() {
 
 	$rendez_vous = rendez_vous()->query_loop->rendez_vous;
-	$classes      = [];
+	$classes     = [];
 
 	// Rendez Vou status - inherit, private.
 	$classes[] = esc_attr( $rendez_vous->post_status );
 
 	$classes = apply_filters( 'rendez_vous_get_class', $classes );
 	$classes = array_merge( $classes, [] );
-	$retval = 'class="' . join( ' ', $classes ) . '"';
+	$retval  = 'class="' . join( ' ', $classes ) . '"';
 
 	return $retval;
 
@@ -638,7 +638,7 @@ function rendez_vous_the_link() {
 function rendez_vous_get_the_link() {
 
 	$user_can = true;
-	$link = rendez_vous_get_single_link( rendez_vous()->query_loop->rendez_vous->ID, rendez_vous()->query_loop->rendez_vous->post_author );
+	$link     = rendez_vous_get_single_link( rendez_vous()->query_loop->rendez_vous->ID, rendez_vous()->query_loop->rendez_vous->post_author );
 
 	switch ( rendez_vous()->query_loop->rendez_vous->post_status ) {
 		case 'private':
@@ -647,7 +647,7 @@ function rendez_vous_get_the_link() {
 
 		case 'draft':
 			$user_can = current_user_can( 'edit_rendez_vous', rendez_vous_get_the_rendez_vous_id() );
-			$link = rendez_vous_get_edit_link( rendez_vous()->query_loop->rendez_vous->ID, rendez_vous()->query_loop->rendez_vous->post_author );
+			$link     = rendez_vous_get_edit_link( rendez_vous()->query_loop->rendez_vous->ID, rendez_vous()->query_loop->rendez_vous->post_author );
 			break;
 	}
 
@@ -787,10 +787,10 @@ function rendez_vous_get_the_type() {
 	}
 
 	$type_names = wp_list_pluck( $types, 'name' );
-	$type_name = array_pop( $type_names );
+	$type_name  = array_pop( $type_names );
 
 	$type_slugs = wp_list_pluck( $types, 'slug' );
-	$type_slug = array_pop( $type_slugs );
+	$type_slug  = array_pop( $type_slugs );
 
 	$output = sprintf( '<div class="item-desc"><a href="?type=%s" title="%s" class="rendez-vous-type">%s</a></div>',
 		esc_attr( $type_slug ),
@@ -840,7 +840,7 @@ function rendez_vous_the_status() {
  */
 function rendez_vous_get_the_status() {
 
-	$status = __( 'All members', 'rendez-vous' );
+	$status      = __( 'All members', 'rendez-vous' );
 	$rendez_vous = rendez_vous()->query_loop->rendez_vous;
 
 	if ( 'private' == $rendez_vous->post_status ) {
@@ -873,7 +873,7 @@ add_action( 'rendez_vous_attend_actions', 'rendez_vous_the_user_actions' );
 function rendez_vous_get_the_user_actions() {
 
 	$rendez_vous_id = rendez_vous()->query_loop->rendez_vous->ID;
-	$user_id = rendez_vous()->query_loop->rendez_vous->post_author;
+	$user_id        = rendez_vous()->query_loop->rendez_vous->post_author;
 
 	$edit = false;
 	$view = false;
@@ -886,7 +886,7 @@ function rendez_vous_get_the_user_actions() {
 
 		if ( ! empty( $user_can ) ) {
 			$view_link = rendez_vous_get_single_link( $rendez_vous_id, $user_id );
-			$view = '<a href="' . esc_url( $view_link ) . '" class="button view-rendez-vous bp-primary-action" id="view-rendez-vous-' . $rendez_vous_id . ' ">' . _x( 'View', 'Rendez Vous view link', 'rendez-vous' ) . '</a>';
+			$view      = '<a href="' . esc_url( $view_link ) . '" class="button view-rendez-vous bp-primary-action" id="view-rendez-vous-' . $rendez_vous_id . ' ">' . _x( 'View', 'Rendez Vous view link', 'rendez-vous' ) . '</a>';
 		}
 	}
 
@@ -894,7 +894,7 @@ function rendez_vous_get_the_user_actions() {
 
 	if ( current_user_can( 'edit_rendez_vous', $rendez_vous_id ) && 'schedule' == $current_action ) {
 		$edit_link = rendez_vous_get_edit_link( $rendez_vous_id, $user_id );
-		$edit = '<a href="' . esc_url( $edit_link ) . '" class="button edit-rendez-vous bp-primary-action" id="edit-rendez-vous-' . $rendez_vous_id . ' ">' . _x( 'Edit', 'Rendez Vous edit link', 'rendez-vous' ) . '</a>';
+		$edit      = '<a href="' . esc_url( $edit_link ) . '" class="button edit-rendez-vous bp-primary-action" id="edit-rendez-vous-' . $rendez_vous_id . ' ">' . _x( 'Edit', 'Rendez Vous edit link', 'rendez-vous' ) . '</a>';
 	}
 
 	// Filter and return the HTML button.
@@ -996,9 +996,9 @@ function rendez_vous_single_permalink() {
  */
 function rendez_vous_single_get_permalink() {
 
-	$id = rendez_vous_single_get_the_id();
+	$id        = rendez_vous_single_get_the_id();
 	$organizer = rendez_vous()->item->organizer;
-	$link = rendez_vous_get_single_link( $id, $organizer );
+	$link      = rendez_vous_get_single_link( $id, $organizer );
 
 	return apply_filters( 'rendez_vous_single_get_permalink', $link, $id, $organizer );
 
@@ -1022,9 +1022,9 @@ function rendez_vous_single_edit_link() {
  */
 function rendez_vous_single_get_edit_link() {
 
-	$id = rendez_vous_single_get_the_id();
+	$id        = rendez_vous_single_get_the_id();
 	$organizer = rendez_vous()->item->organizer;
-	$link = rendez_vous_get_edit_link( $id, $organizer );
+	$link      = rendez_vous_get_edit_link( $id, $organizer );
 
 	return apply_filters( 'rendez_vous_single_get_edit_link', $link, $id, $organizer );
 
@@ -1098,7 +1098,7 @@ function rendez_vous_single_get_the_type() {
 	$type = '';
 	if ( ! empty( rendez_vous()->item->type ) ) {
 		$types = wp_list_pluck( rendez_vous()->item->type, 'name' );
-		$type = array_pop( $types );
+		$type  = array_pop( $types );
 	}
 
 	return apply_filters( 'rendez_vous_single_get_the_type', $type, rendez_vous()->item->type );
@@ -1124,7 +1124,7 @@ function rendez_vous_single_edit_get_the_type() {
 	$rdv = rendez_vous();
 
 	if ( empty( $rdv->types ) ) {
-		$types = rendez_vous_get_terms( [ 'hide_empty' => false ] );
+		$types      = rendez_vous_get_terms( [ 'hide_empty' => false ] );
 		$rdv->types = $types;
 	} else {
 		$types = $rdv->types;
@@ -1135,7 +1135,7 @@ function rendez_vous_single_edit_get_the_type() {
 	$selected_type = 0;
 	if ( ! empty( rendez_vous()->item->type ) ) {
 		$selected_types = wp_list_pluck( rendez_vous()->item->type, 'term_id' );
-		$selected_type = array_pop( $selected_types );
+		$selected_type  = array_pop( $selected_types );
 	}
 
 	foreach ( $types as $type ) {
@@ -1311,7 +1311,7 @@ function rendez_vous_single_get_the_dates( $view = 'single' ) {
 	foreach ( $attendees as $attendee ) {
 		$user_link = trailingslashit( bp_core_get_user_domain( $attendee ) );
 		$user_name = bp_core_get_user_displayname( $attendee );
-		$tr_class = $attendee == bp_loggedin_user_id() ? 'edited' : false;
+		$tr_class  = $attendee == bp_loggedin_user_id() ? 'edited' : false;
 
 		$output .= '<tr class="' . $tr_class . '"><td>';
 
@@ -1366,8 +1366,8 @@ function rendez_vous_single_get_the_dates( $view = 'single' ) {
 	}
 
 	foreach ( $header as $date ) {
-		$checked = checked( true, in_array( bp_loggedin_user_id(), $days[ $date ] ), false );
-		$ending_rows['total']        .= '<td><strong>' . count( $days[ $date ] ) . '</strong></td>';
+		$checked               = checked( true, in_array( bp_loggedin_user_id(), $days[ $date ] ), false );
+		$ending_rows['total'] .= '<td><strong>' . count( $days[ $date ] ) . '</strong></td>';
 
 		// Let the User set his prefs.
 		if ( 'edit' != $view ) {
@@ -1472,13 +1472,13 @@ function rendez_vous_single_edit_report() {
 	add_filter( 'quicktags_settings', 'rendez_vous_quicktags_settings' );
 
 	wp_editor( rendez_vous()->item->report, 'rendez-vous-edit-report', [
-		'textarea_name'     => '_rendez_vous_edit[report]',
-		'media_buttons'     => false,
-		'textarea_rows'     => 12,
-		'tinymce'           => apply_filters( 'rendez_vous_single_edit_report_tinymce', false ),
-		'teeny'             => true,
-		'quicktags'         => true,
-		'dfw'               => false,
+		'textarea_name' => '_rendez_vous_edit[report]',
+		'media_buttons' => false,
+		'textarea_rows' => 12,
+		'tinymce'       => apply_filters( 'rendez_vous_single_edit_report_tinymce', false ),
+		'teeny'         => true,
+		'quicktags'     => true,
+		'dfw'           => false,
 	] );
 
 	// Remove the filters, inspired by bbPress.

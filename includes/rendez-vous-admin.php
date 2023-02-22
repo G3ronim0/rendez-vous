@@ -133,7 +133,7 @@ class Rendez_Vous_Admin {
 		}
 
 		$suffix = SCRIPT_DEBUG ? '' : '.min';
-		$rdv = rendez_vous();
+		$rdv    = rendez_vous();
 
 		wp_enqueue_style( 'rendez-vous-admin-style', $rdv->plugin_css . "rendezvous-admin$suffix.css", [ 'dashicons' ], $rdv->version );
 		wp_enqueue_script( 'rendez-vous-admin-backbone', $rdv->plugin_js . "rendez-vous-admin-backbone$suffix.js", [ 'wp-backbone' ], $rdv->version, true );

@@ -63,7 +63,7 @@ if ( ! class_exists( 'Rendez_Vous_Group' ) && class_exists( 'BP_Group_Extension'
 				'nav_item_position' => 80,
 				'enable_nav_item'   => $this->enable_nav_item(),
 				'screens'           => [
-					'admin' => [
+					'admin'  => [
 						'enabled'          => true,
 						'metabox_context'  => 'side',
 						'metabox_priority' => 'core',
@@ -72,7 +72,7 @@ if ( ! class_exists( 'Rendez_Vous_Group' ) && class_exists( 'BP_Group_Extension'
 						'position' => 80,
 						'enabled'  => true,
 					],
-					'edit' => [
+					'edit'   => [
 						'position' => 80,
 						'enabled'  => true,
 					],
@@ -241,7 +241,8 @@ if ( ! class_exists( 'Rendez_Vous_Group' ) && class_exists( 'BP_Group_Extension'
 		 */
 		public function edit_screen_save( $group_id = null ) {
 
-			if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
+			$method = isset( $_SERVER['REQUEST_METHOD'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) : '';
+			if ( ! empty( $method ) && 'POST' !== strtoupper( $method ) ) {
 				return false;
 			}
 
@@ -256,7 +257,7 @@ if ( ! class_exists( 'Rendez_Vous_Group' ) && class_exists( 'BP_Group_Extension'
 			];
 
 			if ( ! empty( $_POST['_rendez_vous_group_activate'] ) ) {
-				$s = wp_parse_args( $_POST, $settings );
+				$s        = wp_parse_args( $_POST, $settings );
 				$settings = array_intersect_key(
 					array_map( 'absint', $s ),
 					$settings
@@ -340,7 +341,7 @@ if ( ! class_exists( 'Rendez_Vous_Group' ) && class_exists( 'BP_Group_Extension'
 				if ( 'single' == $this->screen && ! empty( $rendez_vous->item->id ) ) {
 
 					$message = false;
-					$action = false;
+					$action  = false;
 
 					// The Group doesn't support Rendez Vous anymore.
 					if ( ! self::group_get_option( $group_id, '_rendez_vous_group_activate', false ) ) {
@@ -636,7 +637,7 @@ if ( ! class_exists( 'Rendez_Vous_Group' ) && class_exists( 'BP_Group_Extension'
 
 			// Get the Rendez Vous attached to an hidden Group of the User.
 			$hidden_rendez_vous = "SELECT pm.post_id FROM {$wpdb->postmeta} pm WHERE pm.meta_key = '_rendez_vous_group_id' AND pm.meta_value IN ( {$user_hidden_groups} )";
-			$hide = $wpdb->get_col( $hidden_rendez_vous );
+			$hide               = $wpdb->get_col( $hidden_rendez_vous );
 
 			return $hide;
 
@@ -683,7 +684,7 @@ if ( ! class_exists( 'Rendez_Vous_Group' ) && class_exists( 'BP_Group_Extension'
 			}
 
 			$rendez_vous_id = intval( $args['id'] );
-			$author = get_post_field( 'post_author', $rendez_vous_id );
+			$author         = get_post_field( 'post_author', $rendez_vous_id );
 
 			if ( empty( $author ) ) {
 				return $organizer_id;
@@ -704,7 +705,7 @@ if ( ! class_exists( 'Rendez_Vous_Group' ) && class_exists( 'BP_Group_Extension'
 		 */
 		public function group_rendez_vous_link( $id = 0, $organizer = 0 ) {
 
-			$link = false;
+			$link   = false;
 			$action = false;
 
 			if ( empty( $id ) || empty( $organizer ) ) {
@@ -740,7 +741,7 @@ if ( ! class_exists( 'Rendez_Vous_Group' ) && class_exists( 'BP_Group_Extension'
 
 			if ( empty( $group->id ) || $group_id == $group->id ) {
 				$group = groups_get_group( [
-					'group_id' => $group_id,
+					'group_id'        => $group_id,
 					'populate_extras' => false,
 				] );
 
@@ -775,7 +776,7 @@ if ( ! class_exists( 'Rendez_Vous_Group' ) && class_exists( 'BP_Group_Extension'
 
 			$link = add_query_arg(
 				[
-					'rdv' => $id,
+					'rdv'    => $id,
 					'action' => 'edit',
 				],
 				$group_link
@@ -838,7 +839,7 @@ if ( ! class_exists( 'Rendez_Vous_Group' ) && class_exists( 'BP_Group_Extension'
 			}
 
 			$link = add_query_arg( [
-				'rdv' => $id,
+				'rdv'    => $id,
 				'action' => 'delete',
 			], $group_link );
 			$link = wp_nonce_url( $link, 'rendez_vous_delete' );
@@ -921,7 +922,7 @@ if ( ! class_exists( 'Rendez_Vous_Group' ) && class_exists( 'BP_Group_Extension'
 				return $args;
 			}
 
-			$group = groups_get_current_group();
+			$group          = groups_get_current_group();
 			$rendez_vous_id = $args['item_id'];
 
 			$args = [
@@ -986,7 +987,7 @@ if ( ! class_exists( 'Rendez_Vous_Group' ) && class_exists( 'BP_Group_Extension'
 			$group_id = get_post_meta( $rendez_vous_id, '_rendez_vous_group_id', true );
 
 			if ( ! empty( $group_id ) && self::group_get_option( $group_id, '_rendez_vous_group_activate', false ) ) {
-				$output = '<div class="rendez-vous-avatar">';
+				$output  = '<div class="rendez-vous-avatar">';
 				$output .= bp_core_fetch_avatar( [
 					'item_id' => $group_id,
 					'object'  => 'group',

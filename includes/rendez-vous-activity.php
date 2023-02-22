@@ -141,7 +141,7 @@ function rendez_vous_published_activity( $id = 0, $args = [], $notify = false, $
 		return;
 	}
 
-	$rendez_vous = rendez_vous_get_item( $id );
+	$rendez_vous     = rendez_vous_get_item( $id );
 	$rendez_vous_url = rendez_vous_get_single_link( $id, $rendez_vous->organizer );
 
 	$rendez_vous_link = '<a href="' . esc_url( $rendez_vous_url ) . '">' . esc_html( $rendez_vous->title ) . '</a>';
@@ -274,7 +274,7 @@ function rendez_vous_delete_item_activities( $rendez_vous_id = 0, $rendez_vous =
 	}
 
 	$types = [ 'new_rendez_vous', 'updated_rendez_vous' ];
-	$args = apply_filters( 'rendez_vous_delete_item_activities_args', [
+	$args  = apply_filters( 'rendez_vous_delete_item_activities_args', [
 		'item_id'   => $rendez_vous_id,
 		'component' => buddypress()->rendez_vous->id,
 	] );

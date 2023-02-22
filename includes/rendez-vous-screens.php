@@ -57,9 +57,9 @@ class Rendez_Vous_Screens {
 	 */
 	public function setup_globals() {
 
-		$this->template = '';
+		$this->template     = '';
 		$this->template_dir = rendez_vous()->includes_dir . 'templates';
-		$this->screen = '';
+		$this->screen       = '';
 
 	}
 

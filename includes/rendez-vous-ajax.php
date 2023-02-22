@@ -50,7 +50,7 @@ function rendez_vous_ajax_get_users() {
 	$response = new stdClass();
 
 	$response->meta = [
-		'total_page' => 0,
+		'total_page'   => 0,
 		'current_page' => 0,
 	];
 
@@ -63,7 +63,7 @@ function rendez_vous_ajax_get_users() {
 
 	if ( ! empty( $args['per_page'] ) ) {
 		$response->meta = [
-			'total_page' => ceil( (int) $query->total_users / (int) $args['per_page'] ),
+			'total_page'   => ceil( (int) $query->total_users / (int) $args['per_page'] ),
 			'current_page' => (int) $args['page'],
 		];
 	}
@@ -144,7 +144,7 @@ function rendez_vous_ajax_create() {
 		$dates = $maydates;
 	}
 
-	$maydates = [];
+	$maydates        = [];
 	$maydates_errors = [];
 
 	foreach ( $dates as $date ) {
@@ -158,7 +158,7 @@ function rendez_vous_ajax_create() {
 				continue;
 			}
 
-			$timestamp = strtotime( $date['mysql'] . ' ' . $date['hour1'] );
+			$timestamp              = strtotime( $date['mysql'] . ' ' . $date['hour1'] );
 			$maydates[ $timestamp ] = [];
 		}
 
@@ -169,7 +169,7 @@ function rendez_vous_ajax_create() {
 				continue;
 			}
 
-			$timestamp = strtotime( $date['mysql'] . ' ' . $date['hour2'] );
+			$timestamp              = strtotime( $date['mysql'] . ' ' . $date['hour2'] );
 			$maydates[ $timestamp ] = [];
 		}
 
@@ -180,7 +180,7 @@ function rendez_vous_ajax_create() {
 				continue;
 			}
 
-			$timestamp = strtotime( $date['mysql'] . ' ' . $date['hour3'] );
+			$timestamp              = strtotime( $date['mysql'] . ' ' . $date['hour3'] );
 			$maydates[ $timestamp ] = [];
 		}
 

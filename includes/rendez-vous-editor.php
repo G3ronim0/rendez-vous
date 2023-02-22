@@ -60,23 +60,23 @@ function rendez_vous_enqueue_editor( $args = [] ) {
 	];
 
 	$settings = [
-		'tabs'      => $tabs,
-		'tabUrl'    => esc_url( add_query_arg( [ 'chromeless' => true ], admin_url( 'admin-ajax.php' ) ) ),
-		'mimeTypes' => false,
-		'captions'  => ! apply_filters( 'disable_captions', '' ),
-		'nonce'     => [
+		'tabs'         => $tabs,
+		'tabUrl'       => esc_url( add_query_arg( [ 'chromeless' => true ], admin_url( 'admin-ajax.php' ) ) ),
+		'mimeTypes'    => false,
+		'captions'     => ! apply_filters( 'disable_captions', '' ),
+		'nonce'        => [
 			'sendToEditor' => wp_create_nonce( 'media-send-to-editor' ),
 			'rendezvous'   => wp_create_nonce( 'rendez-vous-editor' ),
 		],
-		'post'    => [
+		'post'         => [
 			'id' => 0,
 		],
 		'defaultProps' => $props,
 		'embedExts'    => false,
 	];
 
-	$post = null;
-	$hier = null;
+	$post                 = null;
+	$hier                 = null;
 	$settings['user']     = intval( $args['user_id'] );
 	$settings['group_id'] = intval( $args['group_id'] );
 
@@ -86,7 +86,7 @@ function rendez_vous_enqueue_editor( $args = [] ) {
 
 	// Do we have Member types?
 	$rendez_vous_member_types = [];
-	$member_types = bp_get_member_types( [], 'objects' );
+	$member_types             = bp_get_member_types( [], 'objects' );
 	if ( ! empty( $member_types ) && is_array( $member_types ) ) {
 		$rendez_vous_member_types['rdvMemberTypesAll'] = esc_html__( 'All member types', 'rendez-vous' );
 		foreach ( $member_types as $type_key => $type ) {
@@ -104,51 +104,51 @@ function rendez_vous_enqueue_editor( $args = [] ) {
 	$strings = [
 
 		// Generic.
-		'url'         => __( 'URL', 'rendez-vous' ),
-		'addMedia'    => __( 'Add Media', 'rendez-vous' ),
-		'search'      => __( 'Search', 'rendez-vous' ),
-		'select'      => __( 'Select', 'rendez-vous' ),
-		'cancel'      => __( 'Cancel', 'rendez-vous' ),
+		'url'                   => __( 'URL', 'rendez-vous' ),
+		'addMedia'              => __( 'Add Media', 'rendez-vous' ),
+		'search'                => __( 'Search', 'rendez-vous' ),
+		'select'                => __( 'Select', 'rendez-vous' ),
+		'cancel'                => __( 'Cancel', 'rendez-vous' ),
 
 		/*
 		 * translators: This is a would-be plural string used in the media manager.
 		 * If there is not a word you can use in your language to avoid issues with the
 		 * lack of plural support here, turn it into "selected: %d" then translate it.
 		 */
-		'selected'    => __( '%d selected', 'rendez-vous' ),
-		'dragInfo'    => __( 'Drag and drop to reorder images.', 'rendez-vous' ),
+		'selected'              => __( '%d selected', 'rendez-vous' ),
+		'dragInfo'              => __( 'Drag and drop to reorder images.', 'rendez-vous' ),
 
 		// Upload.
-		'uploadFilesTitle'  => __( 'Upload Files', 'rendez-vous' ),
-		'uploadImagesTitle' => __( 'Upload Images', 'rendez-vous' ),
+		'uploadFilesTitle'      => __( 'Upload Files', 'rendez-vous' ),
+		'uploadImagesTitle'     => __( 'Upload Images', 'rendez-vous' ),
 
 		// Library.
-		'mediaLibraryTitle'  => __( 'Media Library', 'rendez-vous' ),
-		'insertMediaTitle'   => __( 'Insert Media', 'rendez-vous' ),
-		'createNewGallery'   => __( 'Create a new gallery', 'rendez-vous' ),
-		'returnToLibrary'    => __( '&#8592; Return to library', 'rendez-vous' ),
-		'allMediaItems'      => __( 'All media items', 'rendez-vous' ),
-		'noItemsFound'       => __( 'No items found.', 'rendez-vous' ),
-		'insertIntoPost'     => $hier ? __( 'Insert into page', 'rendez-vous' ) : __( 'Insert into post', 'rendez-vous' ),
-		'uploadedToThisPost' => $hier ? __( 'Uploaded to this page', 'rendez-vous' ) : __( 'Uploaded to this post', 'rendez-vous' ),
-		'warnDelete' => __( "You are about to permanently delete this item.\n  'Cancel' to stop, 'OK' to delete.", 'rendez-vous' ),
+		'mediaLibraryTitle'     => __( 'Media Library', 'rendez-vous' ),
+		'insertMediaTitle'      => __( 'Insert Media', 'rendez-vous' ),
+		'createNewGallery'      => __( 'Create a new gallery', 'rendez-vous' ),
+		'returnToLibrary'       => __( '&#8592; Return to library', 'rendez-vous' ),
+		'allMediaItems'         => __( 'All media items', 'rendez-vous' ),
+		'noItemsFound'          => __( 'No items found.', 'rendez-vous' ),
+		'insertIntoPost'        => $hier ? __( 'Insert into page', 'rendez-vous' ) : __( 'Insert into post', 'rendez-vous' ),
+		'uploadedToThisPost'    => $hier ? __( 'Uploaded to this page', 'rendez-vous' ) : __( 'Uploaded to this post', 'rendez-vous' ),
+		'warnDelete'            => __( "You are about to permanently delete this item.\n  'Cancel' to stop, 'OK' to delete.", 'rendez-vous' ),
 
 		// From URL.
-		'insertFromUrlTitle' => __( 'Insert from URL', 'rendez-vous' ),
+		'insertFromUrlTitle'    => __( 'Insert from URL', 'rendez-vous' ),
 
 		// Featured Images.
 		'setFeaturedImageTitle' => __( 'Set Featured Image', 'rendez-vous' ),
-		'setFeaturedImage'    => __( 'Set featured image', 'rendez-vous' ),
+		'setFeaturedImage'      => __( 'Set featured image', 'rendez-vous' ),
 
 		// Gallery.
-		'createGalleryTitle' => __( 'Create Gallery', 'rendez-vous' ),
-		'editGalleryTitle'   => __( 'Edit Gallery', 'rendez-vous' ),
-		'cancelGalleryTitle' => __( '&#8592; Cancel Gallery', 'rendez-vous' ),
-		'insertGallery'      => __( 'Insert gallery', 'rendez-vous' ),
-		'updateGallery'      => __( 'Update gallery', 'rendez-vous' ),
-		'addToGallery'       => __( 'Add to gallery', 'rendez-vous' ),
-		'addToGalleryTitle'  => __( 'Add to Gallery', 'rendez-vous' ),
-		'reverseOrder'       => __( 'Reverse order', 'rendez-vous' ),
+		'createGalleryTitle'    => __( 'Create Gallery', 'rendez-vous' ),
+		'editGalleryTitle'      => __( 'Edit Gallery', 'rendez-vous' ),
+		'cancelGalleryTitle'    => __( '&#8592; Cancel Gallery', 'rendez-vous' ),
+		'insertGallery'         => __( 'Insert gallery', 'rendez-vous' ),
+		'updateGallery'         => __( 'Update gallery', 'rendez-vous' ),
+		'addToGallery'          => __( 'Add to gallery', 'rendez-vous' ),
+		'addToGalleryTitle'     => __( 'Add to Gallery', 'rendez-vous' ),
+		'reverseOrder'          => __( 'Reverse order', 'rendez-vous' ),
 	];
 
 	$rendez_vous_strings = apply_filters( 'rendez_vous_view_strings', [
@@ -265,7 +265,7 @@ function rendez_vous_enqueue_editor( $args = [] ) {
 	 * to save them using the 'rendez_vous_after_saved' action.
 	 */
 	$rendez_vous_extra_fields = apply_filters( 'rendez_vous_editor_extra_fields', [] );
-	$rendez_vous_add_fields = [];
+	$rendez_vous_add_fields   = [];
 
 	if ( ! empty( $rendez_vous_extra_fields ) && is_array( $rendez_vous_extra_fields ) ) {
 		// Some IDs are restricted to the plugin usage.
@@ -346,7 +346,7 @@ function rendez_vous_enqueue_editor( $args = [] ) {
 
 	$settings = apply_filters( 'media_view_settings', $settings, $post );
 	$strings  = apply_filters( 'media_view_strings', $strings, $post );
-	$strings = array_merge( $strings, [
+	$strings  = array_merge( $strings, [
 		'rendez_vous_strings'      => $rendez_vous_strings,
 		'rendez_vous_fields'       => $rendez_vous_fields,
 		'rendez_vous_date_strings' => $rendez_vous_date_strings,
@@ -386,8 +386,8 @@ function rendez_vous_plupload_settings() {
 	}
 
 	$settings = [
-		'defaults' => [],
-		'browser'  => [
+		'defaults'      => [],
+		'browser'       => [
 			'mobile'    => false,
 			'supported' => false,
 		],

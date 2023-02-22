@@ -46,15 +46,15 @@ function rendez_vous_get_items( $args = [] ) {
 	$defaults = [
 		'attendees' => [], // One or more User IDs who may attend the Rendez Vous.
 		'organizer' => false, // The Author ID of the Rendez Vous.
-		'per_page' => 20,
-		'page' => 1,
-		'search' => false,
-		'exclude' => false, // Comma separated list or array of Rendez Vous IDs.
-		'orderby' => 'modified',
-		'order' => 'DESC',
-		'group_id' => false,
-		'type' => '',
-		'no_cache' => false,
+		'per_page'  => 20,
+		'page'      => 1,
+		'search'    => false,
+		'exclude'   => false, // Comma separated list or array of Rendez Vous IDs.
+		'orderby'   => 'modified',
+		'order'     => 'DESC',
+		'group_id'  => false,
+		'type'      => '',
+		'no_cache'  => false,
 	];
 
 	$r = bp_parse_args( $args, $defaults, 'rendez_vous_get_items_args' );
@@ -68,14 +68,14 @@ function rendez_vous_get_items( $args = [] ) {
 		$rendez_vouss = Rendez_Vous_Item::get( [
 			'attendees' => (array) $r['attendees'],
 			'organizer' => (int) $r['organizer'],
-			'per_page' => $r['per_page'],
-			'page' => $r['page'],
-			'search' => $r['search'],
-			'exclude' => $r['exclude'],
-			'orderby' => $r['orderby'],
-			'order' => $r['order'],
-			'group_id' => $r['group_id'],
-			'type' => $r['type'],
+			'per_page'  => $r['per_page'],
+			'page'      => $r['page'],
+			'search'    => $r['search'],
+			'exclude'   => $r['exclude'],
+			'orderby'   => $r['orderby'],
+			'order'     => $r['order'],
+			'group_id'  => $r['group_id'],
+			'type'      => $r['type'],
 		] );
 
 		if ( ! $r['no_cache'] ) {
@@ -120,8 +120,8 @@ function rendez_vous_prepare_user_for_js( $user ) {
 	];
 
 	$response = [
-		'id' => (int) $user->ID,
-		'name' => $users->display_name,
+		'id'     => (int) $user->ID,
+		'name'   => $users->display_name,
 		'avatar' => htmlspecialchars_decode( bp_core_fetch_avatar( $avatar_args ) ),
 	];
 
@@ -140,9 +140,9 @@ function rendez_vous_prepare_user_for_js( $user ) {
 function rendez_vous_prepare_term_for_js( $term ) {
 
 	$response = [
-		'id' => intval( $term->term_id ),
-		'name' => $term->name,
-		'slug' => $term->slug,
+		'id'    => intval( $term->term_id ),
+		'name'  => $term->name,
+		'slug'  => $term->slug,
 		'count' => intval( $term->count ),
 	];
 
@@ -161,20 +161,20 @@ function rendez_vous_prepare_term_for_js( $term ) {
 function rendez_vous_save( $args = [] ) {
 
 	$r = bp_parse_args( $args, [
-		'id' => false,
-		'organizer' => bp_loggedin_user_id(),
-		'title' => '',
-		'venue' => '',
-		'type' => 0,
+		'id'          => false,
+		'organizer'   => bp_loggedin_user_id(),
+		'title'       => '',
+		'venue'       => '',
+		'type'        => 0,
 		'description' => '',
-		'duration' => '',
-		'privacy' => '',
-		'status' => 'draft',
-		'days' => [], // Example: [ 'timestamp' => [ Attendee IDs ] ].
-		'attendees' => [], // Attendees ID.
-		'def_date' => 0, // Timestamp.
-		'report' => '',
-		'group_id' => false,
+		'duration'    => '',
+		'privacy'     => '',
+		'status'      => 'draft',
+		'days'        => [], // Example: [ 'timestamp' => [ Attendee IDs ] ].
+		'attendees'   => [], // Attendees ID.
+		'def_date'    => 0, // Timestamp.
+		'report'      => '',
+		'group_id'    => false,
 	], 'rendez_vous_save_args' );
 
 	if ( empty( $r['title'] ) || empty( $r['organizer'] ) ) {
@@ -303,7 +303,7 @@ function rendez_vous_get_edit_link( $id = 0, $organizer_id = 0 ) {
 
 	$link = trailingslashit( bp_core_get_user_domain( $organizer_id ) . buddypress()->rendez_vous->slug . '/schedule' );
 	$link = add_query_arg( [
-		'rdv' => $id,
+		'rdv'    => $id,
 		'action' => 'edit',
 	], $link );
 
@@ -328,7 +328,7 @@ function rendez_vous_get_delete_link( $id = 0, $organizer_id = 0 ) {
 
 	$link = trailingslashit( bp_core_get_user_domain( $organizer_id ) . buddypress()->rendez_vous->slug . '/schedule' );
 	$link = add_query_arg( [
-		'rdv' => $id,
+		'rdv'    => $id,
 		'action' => 'delete',
 	], $link );
 	$link = wp_nonce_url( $link, 'rendez_vous_delete' );
@@ -442,10 +442,10 @@ function rendez_vous_handle_actions() {
 			bp_core_redirect( $redirect );
 		}
 
-		$args = [];
+		$args      = [];
 		$edit_data = filter_input( INPUT_POST, '_rendez_vous_edit', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
-		$action = isset( $_POST['_rendez_vous_edit']['action'] ) ? sanitize_key( wp_unslash( $_POST['_rendez_vous_edit']['action'] ) ) : '';
-		$args = array_diff_key( $edit_data, [
+		$action    = isset( $_POST['_rendez_vous_edit']['action'] ) ? sanitize_key( wp_unslash( $_POST['_rendez_vous_edit']['action'] ) ) : '';
+		$args      = array_diff_key( $edit_data, [
 			'action' => 0,
 			'submit' => 0,
 		] );
@@ -487,7 +487,7 @@ function rendez_vous_handle_actions() {
 		$redirect = remove_query_arg( [ 'n', 'action' ], wp_get_referer() );
 
 		$rendez_vous_id = absint( $_POST['_rendez_vous_prefs']['id'] );
-		$rendez_vous = rendez_vous_get_item( $rendez_vous_id );
+		$rendez_vous    = rendez_vous_get_item( $rendez_vous_id );
 
 		$attendee_id = bp_loggedin_user_id();
 
@@ -567,7 +567,7 @@ function rendez_vous_handle_actions() {
 function rendez_vous_download_ical() {
 
 	$ical_page = [
-		'is' => (bool) bp_is_current_action( 'schedule' ) && 'ical' == bp_action_variable( 0 ),
+		'is'  => (bool) bp_is_current_action( 'schedule' ) && 'ical' == bp_action_variable( 0 ),
 		'rdv' => (int) bp_action_variable( 1 ),
 	];
 
@@ -589,7 +589,8 @@ function rendez_vous_download_ical() {
 
 	// Redirect the User to the login form.
 	if ( ! is_user_logged_in() ) {
-		bp_core_no_access( [ 'redirect' => $_SERVER['REQUEST_URI'] ] );
+		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+		bp_core_no_access( [ 'redirect' => $request_uri ] );
 		return;
 	}
 
@@ -619,7 +620,7 @@ function rendez_vous_download_ical() {
 		bp_core_redirect( $redirect );
 	}
 
-	$minutes = intval( $hourminutes[1] ) + ( intval( $hourminutes[0] ) * 60 );
+	$minutes  = intval( $hourminutes[1] ) + ( intval( $hourminutes[0] ) * 60 );
 	$end_date = strtotime( '+' . $minutes . ' minutes', $rendez_vous->def_date );
 
 	// Dates are stored as UTC althought values are local, we need to reconvert.
@@ -673,7 +674,7 @@ function rendez_vous_has_types( $rendez_vous = null ) {
 	$rdv = rendez_vous();
 
 	if ( empty( $rdv->types ) ) {
-		$types = rendez_vous_get_terms( [ 'hide_empty' => false ] );
+		$types      = rendez_vous_get_terms( [ 'hide_empty' => false ] );
 		$rdv->types = $types;
 	} else {
 		$types = $rdv->types;

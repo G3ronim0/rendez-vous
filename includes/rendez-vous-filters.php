@@ -83,7 +83,7 @@ function rendez_vous_filter_kses( $content ) {
 
 	global $allowedtags;
 
-	$activity_allowedtags = $allowedtags;
+	$activity_allowedtags                  = $allowedtags;
 	$activity_allowedtags['span']          = [];
 	$activity_allowedtags['span']['class'] = [];
 	$activity_allowedtags['a']['class']    = [];

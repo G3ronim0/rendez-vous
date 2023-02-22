@@ -106,7 +106,7 @@ if ( ! class_exists( 'Rendez_Vous' ) ) :
 			// Define a global to get the textdomain of your plugin.
 			$this->domain = 'rendez-vous';
 
-			$this->file = __FILE__;
+			$this->file     = __FILE__;
 			$this->basename = plugin_basename( $this->file );
 
 			// Define a global that we can use to construct file paths throughout the component.
@@ -118,7 +118,7 @@ if ( ! class_exists( 'Rendez_Vous' ) ) :
 			// Define a global that we can use to construct file paths starting from the includes directory.
 			$this->lang_dir = trailingslashit( $this->plugin_dir . 'languages' );
 
-			$this->plugin_url = plugin_dir_url( $this->file );
+			$this->plugin_url   = plugin_dir_url( $this->file );
 			$this->includes_url = trailingslashit( $this->plugin_url . 'includes' );
 
 			// Define a global that we can use to construct url to the javascript scripts needed by the component.
