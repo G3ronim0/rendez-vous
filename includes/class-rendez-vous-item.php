@@ -1,8 +1,8 @@
 <?php
 /**
- * Rendez Vous Classes.
+ * Rendez Vous Item class.
  *
- * Editor & Crud Classes.
+ * The CRUD class for Rendez Vous Items.
  *
  * @package Rendez_Vous
  * @subpackage Classes
@@ -11,108 +11,6 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
-}
-
-/**
- * Rendez Vous Editor Class.
- *
- * This class is used to create the Rendez Vous.
- *
- * @since 1.0.0
- */
-class Rendez_Vous_Editor {
-
-	/**
-	 * Settings array.
-	 *
-	 * @since 1.0.0
-	 * @var array
-	 */
-	private static $settings = [];
-
-	/**
-	 * Constructor.
-	 *
-	 * @since 1.0.0
-	 */
-	private function __construct() {}
-
-	/**
-	 * Set the settings.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param str $editor_id The Editor identifier.
-	 * @param array $settings The Editor settings.
-	 */
-	public static function set( $editor_id, $settings ) {
-
-		$set = bp_parse_args( $settings, [
-			'component'       => 'rendez_vous',
-			'status'          => 'public',
-			'btn_caption'     => __( 'New Rendez Vous', 'rendez-vous' ),
-			'btn_class'       => 'btn-rendez-vous',
-			'action'          => 'rendez_vous_create',
-			'group_id'        => null,
-		], 'rendez_vous_editor_args' );
-
-		self::$settings = array_merge( $set, [ 'rendez_vous_button_id' => '#' . $editor_id ] );
-
-		return $set;
-
-	}
-
-	/**
-	 * Display the button to launch the Editor.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param str $editor_id The Editor identifier.
-	 * @param array $settings The Editor settings.
-	 */
-	public static function editor( $editor_id, $settings = [] ) {
-
-		$set = self::set( $editor_id, $settings );
-
-		$load_editor = apply_filters( 'rendez_vous_load_editor', bp_is_my_profile() );
-
-		if ( current_user_can( 'publish_rendez_vouss' ) && ! empty( $load_editor ) ) {
-
-			bp_button( [
-				'id'                => 'create-' . $set['component'] . '-' . $set['status'],
-				'component'         => 'rendez_vous',
-				'must_be_logged_in' => true,
-				'block_self'        => false,
-				'wrapper_id'        => $editor_id,
-				'wrapper_class'     => $set['btn_class'],
-				'link_class'        => 'add-' . $set['status'],
-				'link_href'         => '#',
-				'link_title'        => $set['btn_caption'],
-				'link_text'         => $set['btn_caption'],
-			] );
-
-		}
-
-		self::launch( $editor_id );
-
-	}
-
-	/**
-	 * Starts the editor.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param str $editor_id The Editor identifier.
-	 */
-	public static function launch( $editor_id ) {
-
-		$args = self::$settings;
-
-		// Time to enqueue script.
-		rendez_vous_enqueue_editor( $args );
-
-	}
-
 }
 
 /**
@@ -297,9 +195,9 @@ class Rendez_Vous_Item {
 				$this->older_date = date_i18n( 'Y-m-d H:i:s', $timestamps[0] );
 			}
 
-			$this->def_date    = get_post_meta( $rendez_vous->ID, '_rendez_vous_defdate', true );
-			$this->modified    = $rendez_vous->post_modified;
-			$this->group_id    = get_post_meta( $rendez_vous->ID, '_rendez_vous_group_id', true );
+			$this->def_date = get_post_meta( $rendez_vous->ID, '_rendez_vous_defdate', true );
+			$this->modified = $rendez_vous->post_modified;
+			$this->group_id = get_post_meta( $rendez_vous->ID, '_rendez_vous_group_id', true );
 
 		}
 
@@ -346,12 +244,12 @@ class Rendez_Vous_Item {
 
 			// Update.
 			$wp_update_post_args = [
-				'ID'             => $this->id,
-				'post_author'    => $this->organizer,
-				'post_title'     => $this->title,
-				'post_type'      => 'rendez_vous',
-				'post_excerpt'   => $this->description,
-				'post_status'    => ! empty( $this->privacy ) ? 'private' : $this->status,
+				'ID'           => $this->id,
+				'post_author'  => $this->organizer,
+				'post_title'   => $this->title,
+				'post_type'    => 'rendez_vous',
+				'post_excerpt' => $this->description,
+				'post_status'  => ! empty( $this->privacy ) ? 'private' : $this->status,
 			];
 
 			// The report is saved once the Rendez Vous date is past.
@@ -369,11 +267,11 @@ class Rendez_Vous_Item {
 
 			// Insert.
 			$wp_insert_post_args = [
-				'post_author'    => $this->organizer,
-				'post_title'     => $this->title,
-				'post_type'      => 'rendez_vous',
-				'post_excerpt'   => $this->description,
-				'post_status'    => 'draft',
+				'post_author'  => $this->organizer,
+				'post_title'   => $this->title,
+				'post_type'    => 'rendez_vous',
+				'post_excerpt' => $this->description,
+				'post_status'  => 'draft',
 			];
 
 			$result = wp_insert_post( $wp_insert_post_args );
@@ -585,6 +483,7 @@ class Rendez_Vous_Item {
 			// We really want an array.
 			$attendees = (array) $r['attendees'];
 
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 			$query_args['meta_query'] = [
 				[
 					'key'     => '_rendez_vous_attendees',
@@ -602,6 +501,7 @@ class Rendez_Vous_Item {
 			];
 
 			if ( empty( $query_args['meta_query'] ) ) {
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				$query_args['meta_query'] = [ $group_query ];
 			} else {
 				$query_args['meta_query'][] = $group_query;
@@ -609,6 +509,7 @@ class Rendez_Vous_Item {
 		}
 
 		if ( ! empty( $r['type'] ) ) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$query_args['tax_query'] = [
 				[
 					'field'    => 'slug',
@@ -622,7 +523,7 @@ class Rendez_Vous_Item {
 
 		return [
 			'rendez_vous_items' => $rendez_vous_items->posts,
-			'total' => $rendez_vous_items->found_posts,
+			'total'             => $rendez_vous_items->found_posts,
 		];
 
 	}
@@ -648,213 +549,3 @@ class Rendez_Vous_Item {
 	}
 
 }
-
-
-if ( ! class_exists( 'Rendez_Vous_Upcoming_Widget' ) ) :
-
-	/**
-	 * List the upcoming Rendez Vous for the logged-in User.
-	 *
-	 * @since 1.4.0
-	 */
-	class Rendez_Vous_Upcoming_Widget extends WP_Widget {
-
-		/**
-		 * Constructor.
-		 *
-		 * @since 1.4.0
-		 */
-		public function __construct() {
-
-			$widget_ops = [ 'description' => __( 'List the upcoming Rendez Vous for the logged-in user.', 'rendez-vous' ) ];
-			parent::__construct( false, $name = __( 'Upcoming Rendez Vous', 'rendez-vous' ), $widget_ops );
-
-		}
-
-		/**
-		 * Register the widget.
-		 *
-		 * @since 1.4.0
-		 */
-		public static function register_widget() {
-			register_widget( 'Rendez_Vous_Upcoming_Widget' );
-		}
-
-		/**
-		 * Filter the query for this specific widget use.
-		 *
-		 * @since 1.4.0
-		 *
-		 * @param array $query_args The existing query args.
-		 * @return array $query_args The modified query args.
-		 */
-		public function filter_rendez_vous_query( $query_args = [] ) {
-
-			$upcoming_args = array_merge(
-				$query_args,
-				[
-					'post_status' => [ 'private', 'publish' ],
-					'meta_query'  => [
-						'relation' => 'AND',
-						[
-							'key'     => '_rendez_vous_attendees',
-							'value'   => [ bp_loggedin_user_id() ],
-							'compare' => 'IN',
-						],
-						'rendez_vous_date' => [
-							'key'     => '_rendez_vous_defdate',
-							'value'   => bp_core_current_time( true, 'timestamp' ),
-							'compare' => '>=',
-						],
-					],
-					'orderby' => 'rendez_vous_date',
-					'order'   => 'ASC',
-				]
-			);
-
-			$allowed_keys = [
-				'post_status'    => true,
-				'post_type'      => true,
-				'posts_per_page' => true,
-				'paged'          => true,
-				'orderby'        => true,
-				'order'          => true,
-				'meta_query'     => true,
-			];
-
-			return array_intersect_key( $upcoming_args, $allowed_keys );
-
-		}
-
-		/**
-		 * Display the widget on front end.
-		 *
-		 * @since 1.4.0
-		 *
-		 * @param array $args The widget arguments.
-		 * @param array $instance The widget instance.
-		 */
-		public function widget( $args = [], $instance = [] ) {
-
-			// Display nothing if the current User is not set.
-			if ( ! is_user_logged_in() ) {
-				return;
-			}
-
-			// Default per_page is 5.
-			$number = 5;
-
-			// No Rendez Vous items to show? Stop.
-			if ( ! empty( $instance['number'] ) ) {
-				$number = (int) $instance['number'];
-			}
-
-			add_filter( 'rendez_vous_query_args', [ $this, 'filter_rendez_vous_query' ], 10, 1 );
-
-			$has_rendez_vous = rendez_vous_has_rendez_vouss( [
-				'per_page' => $number,
-				'no_cache' => true,
-			] );
-
-			remove_filter( 'rendez_vous_query_args', [ $this, 'filter_rendez_vous_query' ], 10, 1 );
-
-			// Display nothing if there are no upcoming Rendez Vous.
-			if ( ! $has_rendez_vous ) {
-				return;
-			}
-
-			// Default title is nothing.
-			$title = '';
-
-			if ( ! empty( $instance['title'] ) ) {
-				$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
-			}
-
-			echo $args['before_widget'];
-
-			if ( ! empty( $title ) ) {
-				echo $args['before_title'] . $title . $args['after_title'];
-			}
-
-			?>
-			<ul>
-
-				<?php while ( rendez_vous_the_rendez_vouss() ) : ?>
-					<?php rendez_vous_the_rendez_vous(); ?>
-
-					<li>
-						<a href="<?php rendez_vous_the_link(); ?>" title="<?php echo esc_attr( rendez_vous_get_the_title() ); ?>"><?php rendez_vous_the_title(); ?></a>
-						<small class="time-to"><?php rendez_vous_time_to(); ?></small>
-					</li>
-
-				<?php endwhile; ?>
-
-			</ul>
-			<?php
-
-			echo $args['after_widget'];
-
-		}
-
-		/**
-		 * Update widget preferences.
-		 *
-		 * @since 1.4.0
-		 *
-		 * @param array $new_instance The old widget arguments.
-		 * @param array $old_instance The new widget instance.
-		 * @return array $instance The updated widget instance.
-		 */
-		public function update( $new_instance, $old_instance ) {
-
-			$instance = [];
-
-			if ( ! empty( $new_instance['title'] ) ) {
-				$instance['title'] = wp_strip_all_tags( wp_unslash( $new_instance['title'] ) );
-			}
-
-			$instance['number'] = (int) $new_instance['number'];
-
-			return $instance;
-
-		}
-
-		/**
-		 * Display the form in Widgets Administration.
-		 *
-		 * @since 1.4.0
-		 *
-		 * @param array $instance The widget instance.
-		 */
-		public function form( $instance = [] ) {
-
-			// Default to nothing.
-			$title = '';
-			if ( isset( $instance['title'] ) ) {
-				$title = $instance['title'];
-			}
-
-			// Number default to 5.
-			$number = 5;
-			if ( ! empty( $instance['number'] ) ) {
-				$number = absint( $instance['number'] );
-			}
-
-			?>
-			<p>
-				<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:', 'rendez-vous' ); ?></label>
-				<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ); ?>" />
-			</p>
-			<p>
-				<label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php esc_html_e( 'Number of upcoming Rendez Vous to show:', 'rendez-vous' ); ?></label>
-				<input id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php echo $number; ?>" size="3" />
-			</p>
-			<?php
-
-		}
-
-	}
-
-endif;
-
-add_action( 'bp_widgets_init', [ 'Rendez_Vous_Upcoming_Widget', 'register_widget' ], 10 );
