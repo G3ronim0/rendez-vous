@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Rendez_Vous' ) ) :
 
 	/**
-	 * Main Rendez Vous Class
+	 * Main Rendez Vous Class.
 	 *
 	 * @since 1.0.0
 	 */
@@ -80,7 +80,7 @@ if ( ! class_exists( 'Rendez_Vous' ) ) :
 		 *
 		 * @since 1.0.0
 		 *
-		 * @return    object    A single instance of this class.
+		 * @return object $instance A single instance of this class.
 		 */
 		public static function start() {
 
@@ -145,7 +145,7 @@ if ( ! class_exists( 'Rendez_Vous' ) ) :
 		}
 
 		/**
-		 * Sets the key hooks to add an action or a filter to
+		 * Sets the key hooks to add an action or a filter to.
 		 *
 		 * @since 1.0.0
 		 */
@@ -172,7 +172,7 @@ if ( ! class_exists( 'Rendez_Vous' ) ) :
 		}
 
 		/**
-		 * Display a warning message to admin
+		 * Display a warning message to admin.
 		 *
 		 * @since 1.0.0
 		 */
@@ -212,7 +212,7 @@ if ( ! class_exists( 'Rendez_Vous' ) ) :
 		}
 
 		/**
-		 * Enqueue scripts if your component is loaded
+		 * Enqueue scripts if your component is loaded.
 		 *
 		 * @since 1.0.0
 		 */
@@ -258,7 +258,7 @@ if ( ! class_exists( 'Rendez_Vous' ) ) :
 		/** Utilities *****************************************************************************/
 
 		/**
-		 * Checks BuddyPress version
+		 * Checks BuddyPress version.
 		 *
 		 * @since 1.0.0
 		 */
@@ -274,7 +274,7 @@ if ( ! class_exists( 'Rendez_Vous' ) ) :
 		}
 
 		/**
-		 * Checks if your plugin's config is similar to BuddyPress
+		 * Checks if your plugin's config is similar to BuddyPress.
 		 *
 		 * @since 1.0.0
 		 */
@@ -376,7 +376,7 @@ if ( ! class_exists( 'Rendez_Vous' ) ) :
 		}
 
 		/**
-		 * Get the component name of the plugin
+		 * Get the component name of the plugin.
 		 *
 		 * @since 1.2.0
 		 *

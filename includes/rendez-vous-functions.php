@@ -2,7 +2,7 @@
 /**
  * Rendez Vous Functions.
  *
- * Plugin functions
+ * Plugin functions.
  *
  * @package Rendez_Vous
  * @subpackage Functions

@@ -47,7 +47,7 @@ class Rendez_Vous_Component extends BP_Component {
 	}
 
 	/**
-	 * Include files
+	 * Include files.
 	 *
 	 * @since 1.0.0
 	 *
@@ -282,7 +282,7 @@ class Rendez_Vous_Component extends BP_Component {
 	}
 
 	/**
-	 * Register the rendez_vous types taxonomy
+	 * Register the rendez_vous types taxonomy.
 	 *
 	 * @since 1.2.0
 	 */

@@ -724,7 +724,7 @@ if ( ! class_exists( 'Rendez_Vous_Group' ) && class_exists( 'BP_Group_Extension'
 				$action = 'rendez_vous_groups_member_removed';
 			}
 
-			/**
+			/*
 			 * If the Group does not support Rendez Vous or
 			 * the Organizer is not a Member of the Group any more,
 			 * remove post meta & activities to be sure the Organizer

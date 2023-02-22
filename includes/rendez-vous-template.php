@@ -15,6 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Type Filter.
+ *
+ * @since 1.0.0
  */
 function render_vous_type_filter() {
 
@@ -120,7 +122,7 @@ class Rendez_Vous_Template {
 	public $component;
 
 	/**
-	 * Include private Rendez Vous ?
+	 * Include private Rendez Vous?
 	 *
 	 * @access public
 	 * @var bool
@@ -184,7 +186,7 @@ class Rendez_Vous_Template {
 	public $order_by;
 
 	/**
-	 * The direction to sort the results (ASC or DESC)
+	 * The direction to sort the results - ASC or DESC.
 	 *
 	 * @access public
 	 * @var string
@@ -192,7 +194,7 @@ class Rendez_Vous_Template {
 	public $sort_order;
 
 	/**
-	 * The type to filter the results with
+	 * The type to filter the results with.
 	 *
 	 * @access public
 	 * @var string
@@ -200,7 +202,7 @@ class Rendez_Vous_Template {
 	public $type;
 
 	/**
-	 * Constructor method.
+	 * Constructor.
 	 *
 	 * @since 1.0.0
 	 *
@@ -354,8 +356,7 @@ class Rendez_Vous_Template {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return bool True if there are more Rendez Vous to show,
-	 *         otherwise false.
+	 * @return bool True if there are more Rendez Vous to show, otherwise false.
 	 */
 	public function rendez_vouss() {
 
@@ -401,6 +402,7 @@ class Rendez_Vous_Template {
  * @since 1.0.0
  *
  * @param array $args The arguments.
+ * @return bool $has_rendez_vouss True if there are Rendez Vous to display, false otherwise.
  */
 function rendez_vous_has_rendez_vouss( $args = [] ) {
 
@@ -489,7 +491,7 @@ function rendez_vous_pagination_count() {
  *
  * @since 1.0.0
  *
- * @return string HTML for the pagination count.
+ * @return string $pag The HTML for the pagination count.
  */
 function rendez_vous_get_pagination_count() {
 
@@ -564,6 +566,8 @@ function rendez_vous_class() {
  * Return the class of the Rendez Vous row.
  *
  * @since 1.0.0
+ *
+ * @return string $retval The class of the Rendez Vous row.
  */
 function rendez_vous_get_class() {
 
@@ -594,6 +598,8 @@ function rendez_vous_avatar() {
  * Return the "avatar" of the Rendez Vous row.
  *
  * @since 1.0.0
+ *
+ * @return string $output The "avatar" of the Rendez Vous row.
  */
 function rendez_vous_get_avatar() {
 
@@ -616,6 +622,8 @@ function rendez_vous_the_title() {
  * Return the title of the Rendez Vous.
  *
  * @since 1.0.0
+ *
+ * @return string $post_title The title of the Rendez Vous.
  */
 function rendez_vous_get_the_title() {
 	return apply_filters( 'rendez_vous_get_the_title', rendez_vous()->query_loop->rendez_vous->post_title );
@@ -634,6 +642,8 @@ function rendez_vous_the_link() {
  * Return the link of the Rendez Vous.
  *
  * @since 1.0.0
+ *
+ * @return string $link The link of the Rendez Vous.
  */
 function rendez_vous_get_the_link() {
 
@@ -724,6 +734,7 @@ function rendez_vous_get_time_to() {
  * @since 1.4.0
  *
  * @param str $time_since_text The time since text.
+ * @return str The modified time since text.
  */
 function rendez_vous_set_time_to_text( $time_since_text = '' ) {
 
@@ -737,6 +748,8 @@ function rendez_vous_set_time_to_text( $time_since_text = '' ) {
  * Check whether the Rendez Vous has a description.
  *
  * @since 1.0.0
+ *
+ * @return bool $user_can Whether the Rendez Vous has a description.
  */
 function rendez_vous_has_description() {
 
@@ -815,6 +828,8 @@ function rendez_vous_the_excerpt() {
  * Return the description of the Rendez Vous.
  *
  * @since 1.0.0
+ *
+ * @return str $excerpt The description of the Rendez Vous.
  */
 function rendez_vous_get_the_excerpt() {
 
@@ -837,6 +852,8 @@ function rendez_vous_the_status() {
  * Return the status of the Rendez Vous.
  *
  * @since 1.0.0
+ *
+ * @return str $status The status of the Rendez Vous.
  */
 function rendez_vous_get_the_status() {
 
@@ -869,6 +886,8 @@ add_action( 'rendez_vous_attend_actions', 'rendez_vous_the_user_actions' );
  * Return the User's action for the Rendez Vous.
  *
  * @since 1.0.0
+ *
+ * @return str $view The User's action for the Rendez Vous.
  */
 function rendez_vous_get_the_user_actions() {
 
@@ -908,6 +927,8 @@ function rendez_vous_get_the_user_actions() {
  * Output the edit form action for the Rendez Vous.
  *
  * @since 1.0.0
+ *
+ * @return str $action The edit form action for the Rendez Vous.
  */
 function rendez_vous_single_the_form_action() {
 
@@ -921,6 +942,8 @@ function rendez_vous_single_the_form_action() {
  * Output the edit form class for the Rendez Vous.
  *
  * @since 1.3.4
+ *
+ * @return str $class The edit form class for the Rendez Vous.
  */
 function rendez_vous_single_the_form_class() {
 
@@ -955,6 +978,8 @@ function rendez_vous_single_the_id() {
  * Return the ID of the Rendez Vous.
  *
  * @since 1.0.0
+ *
+ * @return int $id The ID of the Rendez Vous.
  */
 function rendez_vous_single_get_the_id() {
 	return apply_filters( 'rendez_vous_single_get_the_id', rendez_vous()->item->id );
@@ -973,6 +998,8 @@ function rendez_vous_single_the_title() {
  * Return the title of the Rendez Vous.
  *
  * @since 1.0.0
+ *
+ * @return str $title The title of the Rendez Vous.
  */
 function rendez_vous_single_get_the_title() {
 	return apply_filters( 'rendez_vous_single_get_the_title', rendez_vous()->item->title );
@@ -1043,6 +1070,8 @@ function rendez_vous_single_the_description() {
  * Return the description of the Rendez Vous.
  *
  * @since 1.0.0
+ *
+ * @return str $description The description of the Rendez Vous.
  */
 function rendez_vous_single_get_the_description() {
 
@@ -1065,6 +1094,8 @@ function rendez_vous_single_the_venue() {
  * Return the venue of the Rendez Vous.
  *
  * @since 1.0.0
+ *
+ * @return str $venue The venue of the Rendez Vous.
  */
 function rendez_vous_single_get_the_venue() {
 	return apply_filters( 'rendez_vous_single_get_the_venue', rendez_vous()->item->venue );
@@ -1074,6 +1105,8 @@ function rendez_vous_single_get_the_venue() {
  * Check if the current Rendez Vous has a type.
  *
  * @since 1.2.0
+ *
+ * @return bool Whether the current Rendez Vous has a type or not.
  */
 function rendez_vous_single_has_type() {
 	return (bool) apply_filters( 'rendez_vous_single_has_type', rendez_vous_has_types( rendez_vous()->item ), rendez_vous()->item );
@@ -1092,6 +1125,8 @@ function rendez_vous_single_the_type() {
  * Return the type of the Rendez Vous.
  *
  * @since 1.2.0
+ *
+ * @return str $type The type of the Rendez Vous.
  */
 function rendez_vous_single_get_the_type() {
 
@@ -1118,6 +1153,8 @@ function rendez_vous_single_edit_the_type() {
  * Return the selectbox to choose type for the Rendez Vous.
  *
  * @since 1.2.0
+ *
+ * @return str $output The selectbox to choose type for the Rendez Vous.
  */
 function rendez_vous_single_edit_get_the_type() {
 
@@ -1161,6 +1198,8 @@ function rendez_vous_single_the_duration() {
  * Return the duration of the Rendez Vous.
  *
  * @since 1.0.0
+ *
+ * @return str $duration The duration of the Rendez Vous.
  */
 function rendez_vous_single_get_the_duration() {
 	return apply_filters( 'rendez_vous_single_get_the_duration', rendez_vous()->item->duration );
@@ -1443,6 +1482,8 @@ function rendez_vous_single_get_the_dates( $view = 'single' ) {
  * A report may be created for the Rendez Vous.
  *
  * @since 1.0.0
+ *
+ * @return bool $can_report True if a report may be created for the Rendez Vous.
  */
 function rendez_vous_single_can_report() {
 
@@ -1493,6 +1534,8 @@ function rendez_vous_single_edit_report() {
  * Report for the Rendez Vous exists.
  *
  * @since 1.0.0
+ *
+ * @return bool $report True if a report for the Rendez Vous exists.
  */
 function rendez_vous_single_has_report() {
 	return ! empty( rendez_vous()->item->report );
@@ -1519,9 +1562,11 @@ function rendez_vous_single_get_the_report() {
 }
 
 /**
- * Is the date of the Rendez Vous set ?
+ * Is the date of the Rendez Vous set?
  *
  * @since 1.0.0
+ *
+ * @return bool $def_date True if the date of the Rendez Vous is set.
  */
 function rendez_vous_single_date_set() {
 	return ! empty( rendez_vous()->item->def_date );
@@ -1616,21 +1661,17 @@ function rendez_vous_single_the_submit( $view = 'single' ) {
 
 		if ( current_user_can( 'delete_rendez_vous', rendez_vous()->item->id ) ) :
 			$delete_link = rendez_vous_get_delete_link( rendez_vous()->item->id, rendez_vous()->item->organizer );
-
 			if ( ! empty( $delete_link ) ) :
 				?>
-
-			<a href="<?php echo esc_url( $delete_link ); ?>" class="button delete-rendez-vous bp-secondary-action" id="delete-rendez-vous-<?php echo rendez_vous()->item->id; ?>"><?php esc_html_e( 'Cancel Rendez Vous', 'rendez-vous' ); ?></a>
-
-			<?php
+				<a href="<?php echo esc_url( $delete_link ); ?>" class="button delete-rendez-vous bp-secondary-action" id="delete-rendez-vous-<?php echo rendez_vous()->item->id; ?>"><?php esc_html_e( 'Cancel Rendez Vous', 'rendez-vous' ); ?></a>
+				<?php
 			endif;
-
 		endif;
 
 		if ( current_user_can( 'edit_rendez_vous', rendez_vous()->item->id ) ) :
 			?>
 			<input type="submit" name="_rendez_vous_edit[submit]" id="rendez-vous-edit-submit" value="<?php echo esc_attr( $caption ); ?>" class="bp-primary-action"/>
-		<?php
+			<?php
 		endif;
 
 	} elseif ( current_user_can( 'subscribe_rendez_vous' ) ) {

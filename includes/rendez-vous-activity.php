@@ -1,8 +1,8 @@
 <?php
 /**
- * Rendez Vous Activity
+ * Rendez Vous Activity.
  *
- * Activity functions
+ * Activity functions.
  *
  * @package Rendez_Vous
  * @subpackage Activity

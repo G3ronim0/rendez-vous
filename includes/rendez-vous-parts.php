@@ -2,7 +2,7 @@
 /**
  * Rendez Vous Parts.
  *
- * Template parts used in the plugin
+ * Template parts used in the plugin.
  *
  * @package Rendez_Vous
  * @subpackage Parts

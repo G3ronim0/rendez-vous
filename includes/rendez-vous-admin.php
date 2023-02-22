@@ -1,8 +1,8 @@
 <?php
 /**
- * Rendez Vous Admin
+ * Rendez Vous Admin.
  *
- * Admin class
+ * Admin class.
  *
  * @package Rendez_Vous
  * @subpackage Activity
@@ -40,7 +40,7 @@ class Rendez_Vous_Admin {
 	}
 
 	/**
-	 * The constructor
+	 * Constructor.
 	 *
 	 * @since 1.2.0
 	 */
@@ -190,7 +190,7 @@ class Rendez_Vous_Admin {
 	}
 
 	/**
-	 * Display the admin
+	 * Display the admin screen.
 	 *
 	 * @since 1.2.0
 	 */

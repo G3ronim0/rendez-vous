@@ -2,7 +2,7 @@
 /**
  * Rendez Vous Notifications.
  *
- * Screen and Email notification functions
+ * Screen and Email notification functions.
  *
  * @package Rendez_Vous
  * @subpackage Notifications
@@ -209,7 +209,7 @@ add_action( 'rendez_vous_before_update', 'rendez_vous_maybe_notify_updates', 10,
  * Date set or report created.
  *
  * @since 1.0.0
- * @since 1.4.0 Use the BP Emails
+ * @since 1.4.0 Use the BP Emails.
  *
  * @param int $id The numeric ID of the Rendez Vous.
  * @param array $args The arguments.

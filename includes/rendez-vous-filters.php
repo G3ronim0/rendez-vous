@@ -2,7 +2,7 @@
 /**
  * Rendez Vous Filters.
  *
- * Filters
+ * Filters.
  *
  * @package Rendez_Vous
  * @subpackage Filters
@@ -72,7 +72,7 @@ add_filter( 'rendez_vous_single_get_the_date', 'rendez_vous_append_ical_link', 1
 /**
  * Custom kses filtering for Rendez Vous excerpt content.
  *
- * Inspired by bp_activity_filter_kses
+ * Inspired by bp_activity_filter_kses()
  *
  * @since 1.0.0
  *
@@ -108,7 +108,7 @@ function rendez_vous_filter_kses( $content ) {
 /**
  * Add rel=nofollow to a link.
  *
- * Inspired "bp_activity_make_nofollow_filter()".
+ * Inspired by bp_activity_make_nofollow_filter()
  *
  * @since 1.0.0
  *
@@ -121,7 +121,7 @@ function rendez_vous_make_nofollow_filter( $text = '' ) {
 /**
  * Add rel=nofollow to a link.
  *
- * Inspired by "bp_activity_make_nofollow_filter_callback()".
+ * Inspired by bp_activity_make_nofollow_filter_callback()
  *
  * @since 1.0.0
  *
@@ -138,10 +138,9 @@ function rendez_vous_make_nofollow_filter_callback( $matches ) {
 }
 
 /**
- * Add oembed support to Rendez Vous description and report.
+ * Add oEmbed support to Rendez Vous description and report.
  *
  * @since 1.3.0
- * @uses BP_Embed
  *
  * @param object $bp_oembed_class The BuddyPress oEmbed class.
  */
@@ -173,7 +172,7 @@ function rendez_vous_map_meta_caps( $caps = [], $cap = '', $user_id = 0, $args =
 	// What capability is being checked?
 	switch ( $cap ) {
 
-		/** Reading */
+		// Reading.
 
 		case 'read_private_rendez_vouss':
 
@@ -207,7 +206,7 @@ function rendez_vous_map_meta_caps( $caps = [], $cap = '', $user_id = 0, $args =
 
 			break;
 
-		/** Publishing */
+		// Publishing.
 
 		case 'publish_rendez_vouss':
 
@@ -222,7 +221,7 @@ function rendez_vous_map_meta_caps( $caps = [], $cap = '', $user_id = 0, $args =
 
 			break;
 
-		/** Participate in Rendez Vous */
+		// Participate in Rendez Vous.
 
 		case 'subscribe_rendez_vous':
 			if ( ! empty( $user_id ) ) {
@@ -231,7 +230,7 @@ function rendez_vous_map_meta_caps( $caps = [], $cap = '', $user_id = 0, $args =
 
 			break;
 
-		/** Editing */
+		// Editing.
 
 		case 'edit_rendez_vouss':
 
@@ -287,7 +286,7 @@ function rendez_vous_map_meta_caps( $caps = [], $cap = '', $user_id = 0, $args =
 
 			break;
 
-		/** Deleting */
+		// Deleting.
 
 		case 'delete_rendez_vous':
 
@@ -329,7 +328,7 @@ function rendez_vous_map_meta_caps( $caps = [], $cap = '', $user_id = 0, $args =
 
 			break;
 
-		/** Admin */
+		// Admin.
 
 		case 'rendez_vouss_moderate':
 
@@ -348,7 +347,7 @@ function rendez_vous_map_meta_caps( $caps = [], $cap = '', $user_id = 0, $args =
 
 add_filter( 'map_meta_cap', 'rendez_vous_map_meta_caps', 10, 4 );
 
-/*** Editor filters, inspired by bbPress way of dealing with it ***/
+/** Editor filters, inspired by bbPress way of dealing with it. ***/
 
 /**
  * Edit TinyMCE plugins to match core behaviour.
@@ -373,7 +372,7 @@ function rendez_vous_tiny_mce_plugins( $plugins = [] ) {
 }
 
 /**
- * Edit TeenyMCE buttons to match allowedtags
+ * Edit TeenyMCE buttons to match allowedtags.
  *
  * @since 1.0.0
  *
@@ -400,7 +399,7 @@ function rendez_vous_teeny_mce_buttons( $buttons = [] ) {
 }
 
 /**
- * Edit TinyMCE quicktags buttons to match allowedtags
+ * Edit TinyMCE quicktags buttons to match allowedtags.
  *
  * @since 1.0.0
  *
@@ -431,7 +430,7 @@ function rendez_vous_quicktags_settings( $settings = [] ) {
 }
 
 /**
- * Append a link to download the iCalendar file of the Rendez Vous
+ * Append a link to download the iCalendar file of the Rendez Vous.
  *
  * If for some reason, the dates/hours are not consistent, simply use
  * remove_filter( 'rendez_vous_single_get_the_date', 'rendez_vous_append_ical_link' );
@@ -489,7 +488,6 @@ add_filter( 'groups_forbidden_names', 'rendez_vous_forbidden_names', 10, 1 );
  * Customize the login message.
  *
  * @since  Rendez Vous (1.1.0)
- * @uses buddypress() To get BuddyPress instance.
  *
  * @param string $message The login message.
  * @param string $redirect The url to redirect to once logged in.
