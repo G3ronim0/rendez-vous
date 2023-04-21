@@ -220,7 +220,7 @@ if ( ! class_exists( 'Rendez_Vous_Group' ) && class_exists( 'BP_Group_Extension'
 				<?php do_action( 'rendez_vous_group_edit_screen_after', $group_id ); ?>
 
 				<?php if ( bp_is_group_admin_page() ) : ?>
-					<input type="submit" name="save" value="<?php esc_atr_e( 'Save', 'rendez-vous' ); ?>" />
+					<input type="submit" name="save" value="<?php esc_attr_e( 'Save', 'rendez-vous' ); ?>" />
 				<?php endif; ?>
 
 			</fieldset>
