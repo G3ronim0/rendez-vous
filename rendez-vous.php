@@ -63,6 +63,123 @@ if ( ! class_exists( 'Rendez_Vous' ) ) :
 		public static $bp_config = [];
 
 		/**
+		 * Plugin version.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var string
+		 */
+		public $version;
+
+		/**
+		 * Plugin textdomain.
+		 *
+		 * TODO: This is doing it wrong. Switch to real textdomain.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var string
+		 */
+		public $domain;
+
+		/**
+		 * Plugin file.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var string
+		 */
+		public $file;
+
+		/**
+		 * Plugin basename.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var string
+		 */
+		public $basename;
+
+		/**
+		 * Plugin directory.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var string
+		 */
+		public $plugin_dir;
+
+		/**
+		 * Plugin includes directory.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var string
+		 */
+		public $includes_dir;
+
+		/**
+		 * Plugin languages directory.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var string
+		 */
+		public $lang_dir;
+
+		/**
+		 * Plugin URL.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var string
+		 */
+		public $plugin_url;
+
+		/**
+		 * Plugin includes URL.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var string
+		 */
+		public $includes_url;
+
+		/**
+		 * Plugin Javascript directory URL.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var string
+		 */
+		public $plugin_js;
+
+		/**
+		 * Plugin CSS directory URL.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var string
+		 */
+		public $plugin_css;
+
+		/**
+		 * Screens.
+		 *
+		 * @since 1.0.0
+		 * @var object
+		 */
+		public $screens;
+
+		/**
+		 * Admin object.
+		 *
+		 * @since 1.0.0
+		 * @var object
+		 */
+		public $admin;
+
+		/**
 		 * Initialize the plugin.
 		 *
 		 * @since 1.0.0

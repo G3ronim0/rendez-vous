@@ -21,6 +21,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Rendez_Vous_Screens {
 
 	/**
+	 * Current screen.
+	 *
+	 * @since 1.0.0
+	 * @var string
+	 */
+	public $screen;
+
+	/**
+	 * Template.
+	 *
+	 * @since 1.0.0
+	 * @var string
+	 */
+	public $template;
+
+	/**
+	 * Template directory.
+	 *
+	 * @since 1.0.0
+	 * @var string
+	 */
+	public $template_dir;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 1.0.0
