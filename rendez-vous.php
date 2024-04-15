@@ -180,6 +180,30 @@ if ( ! class_exists( 'Rendez_Vous' ) ) :
 		public $admin;
 
 		/**
+		 * Query Loop placeholder.
+		 *
+		 * @since 1.0.0
+		 * @var array
+		 */
+		public $query_loop;
+
+		/**
+		 * Query Loop item.
+		 *
+		 * @since 1.0.0
+		 * @var array
+		 */
+		public $item;
+
+		/**
+		 * Types of Rendez Vous.
+		 *
+		 * @since 1.0.0
+		 * @var array
+		 */
+		public $types;
+
+		/**
 		 * Initialize the plugin.
 		 *
 		 * @since 1.0.0

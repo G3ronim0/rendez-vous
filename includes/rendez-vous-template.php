@@ -66,6 +66,14 @@ class Rendez_Vous_Template {
 	public $current_rendez_vous = -1;
 
 	/**
+	 * The number of Rendez Vous available in the loop.
+	 *
+	 * @access public
+	 * @var int
+	 */
+	public $rendez_vous_count;
+
+	/**
 	 * The number of Rendez Vous returned by the paged query.
 	 *
 	 * @access public
@@ -200,6 +208,46 @@ class Rendez_Vous_Template {
 	 * @var string
 	 */
 	public $type;
+
+	/**
+	 * Array of Attendee IDs.
+	 *
+	 * @access public
+	 * @var array
+	 */
+	public $attendees;
+
+	/**
+	 * The Organizer ID of the Rendez Vous.
+	 *
+	 * @access public
+	 * @var int|bool
+	 */
+	public $organizer;
+
+	/**
+	 * The Rendez Vous page.
+	 *
+	 * @access public
+	 * @var string
+	 */
+	public $page_arg;
+
+	/**
+	 * The Rendez Vous Group ID.
+	 *
+	 * @access public
+	 * @var int|bool
+	 */
+	public $group_id;
+
+	/**
+	 * The Rendez Vous cache override flag.
+	 *
+	 * @access public
+	 * @var bool
+	 */
+	public $no_cache;
 
 	/**
 	 * Constructor.
