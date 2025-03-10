@@ -21,6 +21,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Rendez_Vous_Component extends BP_Component {
 
 	/**
+	 * The User's default subnav item.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @var string
+	 */
+	public $default_subnav;
+
+	/**
+	 * Array of subnav item positions.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @var array
+	 */
+	public $subnav_position;
+
+	/**
 	 * Constructor method.
 	 *
 	 * @since 1.0.0
